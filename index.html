@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>百度联盟</title>
+        <link rel="stylesheet" href="src/css/main.css" />
+        <link href="css/esui.css" rel="stylesheet" type="text/css" />
+        <link href="css/union.css" rel="stylesheet" type="text/css" />
+        <link href="css/_build.css" rel="stylesheet" type="text/css" />
+        <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" href="http://www.baidu.com/favicon.ico" />
+    </head>
+    <body>
+        <div id="Holder">
+      <div id="MainPage">
+        <div id="Header" class="layout-full-width">
+          <div id="Logo">
+            <a href="">
+              <img src="http://union.baidu.com/client/assets/img/logo.png" />
+            </a>
+          </div>
+          <ul id="Toolbar">
+            <li>
+              <span id="ClientName" class="toolbar_item">
+              </span>
+            </li>
+            <li id="ToolbarUserMsgBar">
+              <a href="/client/#/account/msg/bulletin" class="link toolbar_item">
+                消息
+                <span id="UnReadMsgCount" style="display:none">
+                </span>
+              </a>
+              <div class="layer_topmenu_list">
+                <div id="ToolbarUnReadMsgs" style="display:none;">
+                  <p id="UnReadMsg_head">
+                    <a href="/client/#/account/msg/bulletin">
+                      查看全部
+                    </a>
+                    <span>
+                      我的未读消息
+                    </span>
+                  </p>
+                  <p>
+                    您有
+                    <a href="/client/#/account/msg/bulletin" id="UnReadBulletinCount">
+                    </a>
+                    条未读的
+                    <a href="/client/#/account/msg/bulletin">
+                      系统消息
+                    </a>
+                  </p>
+                  <p>
+                    您有
+                    <a href="/client/#/account/msg/consulting" id="UnReadConsultingCount">
+                    </a>
+                    条未读的
+                    <a href="/client/#/account/msg/consulting">
+                      咨询回复
+                    </a>
+                  </p>
+                </div>
+                <div id="ToolbarUserMsgOptList">
+                  <p>
+                    <a href="/client/#/account/msg/bulletin">
+                      查看系统消息
+                    </a>
+                  </p>
+                  <p>
+                    <a href="/client/#/account/msg/consulting">
+                      查看问题咨询
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="twoborder">
+              <a href="/client/#/account/service" class="toolbar_item">
+                会员服务
+              </a>
+            </li>
+            <li id="AnomalyFiling" style="display: none;">
+              <a href="http://iwenjuan.baidu.com/?code=3vz5cb" target="_blank" class="toolbar_item">
+                异常备案
+              </a>
+            </li>
+            <li id="Liftclosure" style="display: none;">
+              <a href="http://iwenjuan.baidu.com/?code=x3gus2" target="_blank" class="toolbar_item">
+                申请解封
+              </a>
+            </li>
+            <!-- <li><a href="http://trust.baidu.com/vcredit/unioncredit" class="toolbar_item" target="_blank">信誉中心</a></li>
+            -->
+            <li class="last">
+              <a href="/customerLogout.action" class="toolbar_item">
+                安全退出
+              </a>
+            </li>
+          </ul>
+          <!-- 主菜单 -->
+          <ul id="Nav">
+            <ul id="ctrllistNav" data-control="Nav" class="ui-list">
+              <li class="nav_opt ">
+                <a href="/client/#/account" id="TopMenus-account">
+                  账户首页
+                </a>
+              </li>
+              <li class="nav_opt active">
+                <a href="/client/#/report" id="TopMenus-report">
+                  效果报告
+                </a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+        <div id="MainBody" class="layout-full-width">
+          <div id="ReportSidebar" class="layout-sidebar">
+            <div id="ReportNav" class="box sub-nav">
+              <h3>
+                效果报告
+              </h3>
+              <ul ui="" id="ctrllistReportNav" data-control="ReportNav" class="ui-list">
+                <li class="active">
+                  <a href="#/report/cproReport">
+                    网盟推广合作网页版
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="ReportTemplateNav" class="box sub-nav">
+              <h3>
+                报告模板
+              </h3>
+              <ul ui="" id="ctrllistReportTemplateNav" data-control="ReportTemplateNav"
+              class="ui-list">
+                <li class=" ">
+                  <a href="#/report/template/list">
+                    报告模板
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="Hints" class="box sub-nav">
+              <h3>
+                帮助
+              </h3>
+              <ul ui="" id="ctrllistHintList" data-control="HintList" class="ui-list">
+              </ul>
+              <form action="http://yingxiao.baidu.com/new/home/help/index/class_id/5041?ly=helpcd"
+              method="post" target="_blank">
+                <div class="searchArea">
+                  <input type="text" name="keyword" ui="" class="searchInput ui-text" placeholder=""
+                  id="ctrltext_innerui_0" data-control="_innerui_0">
+                  <button type="submit" ui="" class="searchBtn ui-button" id="ctrlbutton_innerui_1"
+                  data-control="_innerui_1">
+                    搜索
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="ReportMain" class="layout-main box clear-fix">
+            <div id="reportCproReportFrame" class="insert-frame-wrapper">
+              <iframe frameborder="0" framespacing="0" marginheight="0" marginwidth="0"
+              scrolling="no" src="TopMenusReport/iframe.html" height="1060" id="myIframe"
+              style="width: 100%; height: 1087px;">
+              </iframe>
+            </div>
+          </div>
+        </div>
+        <div id="Footer" class="layout-full-width">
+          <p class="copyright">
+            &copy;2015
+            <a href="http://www.baidu.com/" class="link" target="_blank">
+              Baidu
+            </a>
+            <a href="http://www.baidu.com/duty/index.html" target="_blank">
+              使用百度前必读
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="HolderMask" class="abs-box abs-background">
+      <iframe src="about:blank" frameborder="0" marginheight="0" marginwidth="0"
+      scrolling="no">
+      </iframe>
+      <div class="cover">
+      </div>
+    </div>
+    <div id="AjaxMask" class="abs-box abs-background">
+      <div id="AjaxLoading" class="abs-box">
+        <div class="loadingWord">
+          <img src="http://union.baidu.com/un-web-lib/css/img/waiting.gif" />
+          加载中，请稍候...
+        </div>
+      </div>
+      <iframe src="about:blank" frameborder="0" marginheight="0" marginwidth="0"
+      scrolling="no">
+      </iframe>
+    </div>
+        <!-- <div class="demo-container ui-demo-light-stage">
+            <div class="row">
+                <div data-ui-type="RangeCalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div="">
+            </div>
+        </div> -->
+
+        <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-6/esl.js"></script>
+        <script src="assets/config.js"></script>
+        <script>
+            require(
+                [
+                    'esui',
+                    'esui/Button',
+                    'esui/RangeCalendar'
+                ],
+                function (ui) {
+                    // console.log(ui);
+                    ui.init();
+                }
+            );
+        </script>
+    </body>
+</html>
