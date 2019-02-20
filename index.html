@@ -256,6 +256,17 @@
                     ui.init();
                 }
             );
+
+            var iframe = document.getElementById('myIframe');
+            setTimeout(function() {
+              if (iframe) {
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                  iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+              }
+            }, 3000);
+            
         </script>
     </body>
 </html>
