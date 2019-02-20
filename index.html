@@ -9,9 +9,42 @@
         <link href="css/_build.css" rel="stylesheet" type="text/css" />
         <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
         <link rel="icon" href="http://www.baidu.com/favicon.ico" />
+        <style>
+            html,body{
+              height:100%;
+              width:100%;
+            }
+            .loading-bar {
+                width: 180px;
+                height: 50px;
+                line-height: 50px;
+                border: 2px solid rgb(214, 231, 242);
+                background: rgb(255, 255, 255);
+                color: rgb(51, 119, 170);
+                font-size: 12px;
+                font-weight: bold;
+            }
+            .loading-bar img {
+                margin: 10px 15px;
+                float: left;
+            }
+            .loading-box {
+                z-index: 999;
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                margin-top: -55px;
+                margin-left: -50px;
+            }
+        </style>
     </head>
     <body>
-        <div id="Holder">
+      <div class="loading-box">
+            <div class="loading-bar">
+              <img src="TopMenusReport/image/waiting.gif">加载中，请稍候...
+            </div>
+      </div>
+    <div id="Holder">
       <div id="MainPage">
         <div id="Header" class="layout-full-width">
           <div id="Logo">
@@ -104,9 +137,19 @@
                   账户首页
                 </a>
               </li>
+              <li class="nav_opt ">
+                <a href="" id="TopMenus-account">
+                  合作管理
+                </a>
+              </li>
               <li class="nav_opt active">
                 <a href="/client/#/report" id="TopMenus-report">
                   效果报告
+                </a>
+              </li>
+              <li class="nav_opt">
+                <a href="" id="TopMenus-report">
+                  积分乐园
                 </a>
               </li>
             </ul>
@@ -161,7 +204,7 @@
           <div id="ReportMain" class="layout-main box clear-fix">
             <div id="reportCproReportFrame" class="insert-frame-wrapper">
               <iframe frameborder="0" framespacing="0" marginheight="0" marginwidth="0"
-              scrolling="no" src="TopMenusReport/iframe.html" height="1060" id="myIframe"
+              scrolling="auto" src="TopMenusReport/iframe.html" height="1060" id="myIframe"
               style="width: 100%; height: 1087px;">
               </iframe>
             </div>
@@ -198,12 +241,6 @@
       scrolling="no">
       </iframe>
     </div>
-        <!-- <div class="demo-container ui-demo-light-stage">
-            <div class="row">
-                <div data-ui-type="RangeCalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div="">
-            </div>
-        </div> -->
-
         <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-6/esl.js"></script>
         <script src="assets/config.js"></script>
         <script>
@@ -211,7 +248,8 @@
                 [
                     'esui',
                     'esui/Button',
-                    'esui/RangeCalendar'
+                    'esui/RangeCalendar',
+                    'esui/Tip'
                 ],
                 function (ui) {
                     // console.log(ui);
