@@ -1,14 +1,16 @@
 
 <!DOCTYPE html>
-<html>
+<html style="overflow: visible;">
 <head>
     <meta charset="utf-8"/>
     <title>union</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="stylesheet" href="./../dep/esui/3.2.0-beta.1/demo/assets/google-code-prettify/prettify.css"/>
+    <link rel="stylesheet" href="./../assets/themes/standard.css" />
     <link rel="stylesheet" href="./css/main.css"/>
         <link rel="stylesheet" href="./css/asset-main.css">
         <link rel="icon" href="http://www.baidu.com/favicon.ico" />
-        <script src="https://echarts.baidu.com/dist/echarts.js"></script>
+        <script src="./js/echarts.min.js"></script>
         <script src="./js/esl.js"></script>
         <!-- <script src="./js/echarts.min.js"></script> -->
         <!-- <script src="./js/babel-support.js"></script> -->
@@ -16,6 +18,46 @@
         // document.domain = 'baidu.com';
         // ../image/esui-monthview-prev-icon.png
     </script>
+<script data-require-id="jquery/jquery.min" src="./../dep/jquery/1.9.1/src/jquery.min.js" async=""></script>
+<script data-require-id="esui/main" src="./../dep/esui/3.2.0-beta.1/src/main.js" async=""></script>
+<script data-require-id="esui/Pager" src="./../dep/esui/3.2.0-beta.1/src/Pager.js" async=""></script>
+<script data-require-id="esui/Tab" src="./../dep/esui/3.2.0-beta.1/src/Tab.js" async=""></script>
+<script data-require-id="esui/lib" src="./../dep/esui/3.2.0-beta.1/src/lib.js" async=""></script>
+<script data-require-id="esui/Control" src="./../dep/esui/3.2.0-beta.1/src/Control.js" async=""></script>
+<script data-require-id="esui/painters" src="./../dep/esui/3.2.0-beta.1/src/painters.js" async=""></script>
+<script data-require-id="esui/Select" src="./../dep/esui/3.2.0-beta.1/src/Select.js" async=""></script>
+<script data-require-id="esui/ViewContext" src="./../dep/esui/3.2.0-beta.1/src/ViewContext.js" async=""></script>
+<script data-require-id="esui/ControlCollection" src="./../dep/esui/3.2.0-beta.1/src/ControlCollection.js" async=""></script>
+<script data-require-id="esui/lib/attribute" src="./../dep/esui/3.2.0-beta.1/src/lib/attribute.js" async=""></script>
+<script data-require-id="esui/lib/class" src="./../dep/esui/3.2.0-beta.1/src/lib/class.js" async=""></script>
+<script data-require-id="esui/lib/date" src="./../dep/esui/3.2.0-beta.1/src/lib/date.js" async=""></script>
+<script data-require-id="esui/lib/dom" src="./../dep/esui/3.2.0-beta.1/src/lib/dom.js" async=""></script>
+<script data-require-id="esui/lib/event" src="./../dep/esui/3.2.0-beta.1/src/lib/event.js" async=""></script>
+<script data-require-id="esui/lib/lang" src="./../dep/esui/3.2.0-beta.1/src/lib/lang.js" async=""></script>
+<script data-require-id="esui/lib/page" src="./../dep/esui/3.2.0-beta.1/src/lib/page.js" async=""></script>
+<script data-require-id="esui/lib/string" src="./../dep/esui/3.2.0-beta.1/src/lib/string.js" async=""></script>
+<script data-require-id="esui/SafeWrapper" src="./../dep/esui/3.2.0-beta.1/src/SafeWrapper.js" async=""></script>
+<script data-require-id="esui/Helper" src="./../dep/esui/3.2.0-beta.1/src/Helper.js" async=""></script>
+<script data-require-id="esui/inheritEventTarget" src="./../dep/esui/3.2.0-beta.1/src/inheritEventTarget.js" async=""></script>
+<script data-require-id="esui/helper/children" src="./../dep/esui/3.2.0-beta.1/src/helper/children.js" async=""></script>
+<script data-require-id="esui/helper/dom" src="./../dep/esui/3.2.0-beta.1/src/helper/dom.js" async=""></script>
+<script data-require-id="esui/helper/event" src="./../dep/esui/3.2.0-beta.1/src/helper/event.js" async=""></script>
+<script data-require-id="esui/helper/html" src="./../dep/esui/3.2.0-beta.1/src/helper/html.js" async=""></script>
+<script data-require-id="esui/helper/life" src="./../dep/esui/3.2.0-beta.1/src/helper/life.js" async=""></script>
+<script data-require-id="esui/helper/template" src="./../dep/esui/3.2.0-beta.1/src/helper/template.js" async=""></script>
+<script data-require-id="mini-event/Event" src="./../dep/mini-event/1.0.2/src/Event.js" async=""></script><script data-require-id="mini-event/lib" src="./../dep/mini-event/1.0.2/src/lib.js" async=""></script><script data-require-id="esui/templateEngine" src="./../dep/esui/3.2.0-beta.1/src/templateEngine.js" async=""></script>
+<script data-require-id="mini-event/EventTarget" src="./../dep/mini-event/1.0.2/src/EventTarget.js" async=""></script>
+<script data-require-id="mini-event/EventQueue" src="./../dep/mini-event/1.0.2/src/EventQueue.js" async=""></script>
+<script data-require-id="esui/InputControl" src="./../dep/esui/3.2.0-beta.1/src/InputControl.js" async=""></script>
+<script data-require-id="esui/Layer" src="./../dep/esui/3.2.0-beta.1/src/Layer.js" async=""></script>
+<script data-require-id="esui/Validity" src="./../dep/esui/3.2.0-beta.1/src/Validity.js" async=""></script>
+<script data-require-id="esui/validator/Validity" src="./../dep/esui/3.2.0-beta.1/src/validator/Validity.js" async=""></script>
+<script data-require-id="esui/behavior/jquery-ui" src="./../dep/esui/3.2.0-beta.1/src/behavior/jquery-ui.js" async=""></script>
+<style>
+    .ui-rangecalendar-arrow {
+        position: absolute;
+    }
+</style>
 </head>
 <body>
 <script>
@@ -40,7 +82,7 @@
                 </div>
                 <div class="ssp-report-dock">
                     <!-- background:#d8fcfe -->
-                    <div data-ui-type="RangeCalendar" lass="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div=""></div>
+                    <div data-ui-type="RangeCalendar" lass="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div="" style="width: 235px"></div>
                     <!-- <div data-ui-type="RangeCalendar" class="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-variants="bordered" <="" div=""></div> -->
                     <esui-button data-ui-id="download" data-ui-group="report-operation" class="ssp-report-download ui-ctrl ui-button" title="下载报告" id="ctrl-report-cpro-download" data-ctrl-id="download" data-ctrl-view-context="report-cpro">
                         <i class="ui-icon-download"></i>
@@ -276,13 +318,13 @@
                                 </div>
                             </esui-table>
                             <div class="list-pager">
-                				<div data-ui-id="test1" data-ui-type="Pager"></div>
+                				<div id="pager-dynamic"></div>
                                 <esui-pager data-ui-id="pager" data-ui-count="@totalCount" data-ui-page="@page"
                                 data-ui-page-size="@pageSize" data-ui-page-type="plain" data-ui-layout="alignRight"
                                 id="ctrl-report-list-pager" data-ctrl-id="pager" data-ctrl-view-context="report-list"
-                                class="ui-ctrl ui-pager">
-                                    <!-- <div id="ctrl-report-list-pager-pager-wrapper" class="ui-pager-alignRight">
-                                        <div id="ctrl-report-list-pager-select-wrapper" class="ui-pager-select-wrapper">
+                                class="ui-ctrl ui-pager" style="overflow: visible;">
+                                    <div id="ctrl-report-list-pager-pager-wrapper" class="ui-pager-alignRight">
+                                        <div id="ctrl-report-list-pager-select-wrapper" class="ui-pager-select-wrapper" style="position: relative">
                                             <span id="ctrl-report-list-pager-label" class="ui-pager-label">
                                                 每页显示
                                             </span>
@@ -290,16 +332,19 @@
                                             tabindex="0" id="ctrl-report-list-ctrl-report-list-pager-select" data-ctrl-id="ctrl-report-list-pager-select"
                                             data-ctrl-view-context="report-list" class="ui-ctrl ui-select" style="width: 40px;">
                                                 <span id="ctrl-report-list-ctrl-report-list-pager-select-text" class="ui-select-text">
-                                                    100
+                                                    20
                                                 </span>
+                                                <span id="ctrl-default-ctrl-default-test1-selectPager-arrow" class="ui-select-arrow ui-icon" style="line-height: 1.6em; left: 2em; right: auto; width: 1.8rem"></span>
                                             </div>
+
+                                            <ol id="ctrl-default-ctrl-default-test1-select-layer" class="ui-select-layer ui-layer" style="z-index: 1; min-width: 60px; bottom: 30px; right: -20px; display: none">
+                                                <li data-index="0" class="ui-select-item ui-select-item-selected"><span>20</span></li>
+                                                <li data-index="1" class="ui-select-item"><span>30</span></li>
+                                                <li data-index="2" class="ui-select-item"><span>50</span></li>
+                                                <li data-index="3" class="ui-select-item"><span>100</span></li>
+                                            </ol>
                                         </div>
-                                        <ul id="ctrl-report-list-pager-main" class="ui-pager-main">
-                                            <li class="ui-pager-item-current" id="ctrl-report-list-pager-page-1" data-page="1">
-                                                1
-                                            </li>
-                                        </ul>
-                                    </div> -->
+                                    </div>
                                 </esui-pager>
                                 <span id="pager-count" class="pager-count">
                                    	<!--  -->
@@ -320,306 +365,381 @@
     <div class="ui-spinner-bouncer2"></div>
     <div class="ui-spinner-bouncer3"></div>
 </div>
-<script>
-        require(
-            [
-                'esui',
-                'esui/Button',
-                'esui/Pager',
-                'esui/RangeCalendar',
-                'esui/RichCalendar'
-            ],
-            function (ui) {
-                ui.init();
-            }
-        );
-</script>
+
         <script src="js/ui.js"></script>
         <script src="js/ria.js"></script>
         <script src="js/biz.js"></script>
         <script src="js/template.js"></script>
         <script src="js/jquery.js"></script>
+
+        <script src="./../dep/esui/3.2.0-beta.1/demo/assets/loader/esl.js"></script>
+        <script src="./../assets/config.js"></script>
+        <script src="./../assets/build/ui.js"></script>
+        <script src="./../assets/sitemap.js"></script>
+        <script src="./../dep/esui/3.2.0-beta.1/demo/assets/google-code-prettify/prettify.js"></script>
+        <script type="text/javascript" src="./../dep/esui/3.2.0-beta.1/demo/demo.js"></script>
 <script>
     $('#TopMenusReport').on('click', function() {
         $("body",parent.document).find('#myIframe').attr({"src": 'TopMenusReport/iframe.html'});
     });
-    /*
-        ***GET查询整体统计数据
-    */
-    $.ajax({
-        type: "get",
-        url: 'http://172.18.100.177/api/getDataItemTotal',
-        data: {
-            startDate: '2019-1-10',
-            endDate: '2019-1-15'
-        },
-        success: function (data) {
-            var item = data.data;
-            // clickCountSum 总点击量
-            // ctr 总点击率
-            // ecpm
-            // incomeSum 预估总收入
-            // pageViewCountSum 总页面展现量
-            // viewCountSum //总代码位展现量
-            $('#clickCountSum').html(item.clickCountSum ? item.clickCountSum : '0');
-            $('#ctr').html(item.ctr ? item.ctr : '--');
-            $('#ecpm').html(item.ecpm ? item.ecpm : '--');
-            $('#incomeSum').html(item.incomeSum ? item.incomeSum : '--');
-            $('#pageViewCountSum').html(item.pageViewCountSum ? item.pageViewCountSum : '0');
-            $('#viewCountSum').html(item.viewCountSum ? item.viewCountSum : '0');
-        },
-        error: function(err) {
-            alert('请求失败');
-        }
-    });
-    /*
-        查询按天的平均统计数据
-    */
-    $.ajax({
-        type: "get",
-        url: 'http://172.18.100.177/api/getDataItemAverageByDay',
-        data: {
-            startDate: '2019-1-10',
-            endDate: '2019-1-15'
-        },
-        success: function (data) {
-            var item = data.data;
-            //clickCountAverage//平均点击量
-            // ctr 平均点击率 id ctrAverage
-            // ecpm ecpmAverage
-            // incomeAverage 预估平均收入
-            // pageViewCountAverage 平均页面展现量
-            // viewCountAverage 平均代码位展现量
-            $('#clickCountAverage').html(item.clickCountAverage);
-            $('#ctrAverage').html(item.ctr);
-            $('#ecpmAverage').html(item.ecpm ? item.ecpm : '0.00');
-            $('#incomeAverage').html(item.incomeAverage ? item.incomeAverage : '0.00');
-            $('#pageViewCountAverage').html(item.pageViewCountAverage);
-            $('#viewCountAverage').html(item.viewCountAverage);
-            console.log(item);
-        },
-        error: function(err) {
-            alert('请求失败');
-        }
-    });
+    
+    var pageSize = 20, pageCount = 0, page = 1;
 
-    /*
-        按天查询统计数据
-    */
-    $.ajax({
-        type: "get",
-        url: 'http://172.18.100.177/api/findDataItemListByCodeLocation',
-        data: {
-            startDate: '2019-1-10',
-            endDate: '2019-1-15',
-            page: 1,
-            size: 5
-        },
-        success: function (data) {
-            var item = data.data;
-            // clickCountSum 总点击量
-            // ctr 总点击率
-            // ecpm
-            // incomeSum 预估总收入
-            // pageViewCountSum 总页面展现量
-            // viewCountSum //总代码位展现量
-            var clickCountSumList = new Array;
-            var ctrList = new Array;
-            var ecpmList = new Array;
-            var incomeSumLit = new Array;
-            var pageViewCountSumList = new Array;
-            var viewCountSumList = new Array;
-            var timeList = new Array;
-
-            var html = '';
-            for(var i = 0; i < item.length; i++) {
-            	clickCountSumList.push(item[i].viewCountSum);
-            	console.log(item[i].viewCountSum);
-            	ctrList.push(item[i].ctr);
-            	ecpmList.push(item[i].ecpm);
-            	incomeSumLit.push(item[i].incomeSum);
-            	pageViewCountSumList.push(item[i].pageViewCountSumList);
-            	viewCountSumList.push(item[i].viewCountSumList);
-            	timeList.push(item[i].dateFormated);
-                html += '<div id="ctrl-report-list-table-row0" class="ui-table-row skin-noGrid-table-row ui-table-row-even skin-noGrid-table-row-even" data-index="0">'+
-						'<table cellpadding="0" cellspacing="0" width="100%" data-control-table="table">'+
-						'<tbody>'+
-						'<tr>'+
-						'<td id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break ui-table-cell-sorted skin-noGrid-table-cell-sorted"'+
-						'style="width:20%;" data-control-table="table" data-row="0" data-col="0">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-0">'+
-						item[i].dateFormated+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-1" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="1">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-1">'+
-						'<p class="base-item">'+
-						item[i].viewCountSum+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-2" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="2">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-2">'+
-						'<p class="base-item">'+
-						item[i].pageViewCountSum+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-3" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="3">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-3">'+
-						'<p class="base-item">'+
-						item[i].clickCountSum+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-4" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="4">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-4">'+
-						'<p class="base-item">'+
-						(item[i].ctr ? item[i].ctr : '--')+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-5" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="5">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-5">'+
-						'<p class="base-item">'+
-						(item[i].ecpm ? item[i].ecpm : '--')+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'<td id="ctrl-report-list-table-cell0-6" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-						'style="width:13%;" data-control-table="table" data-row="0" data-col="6">'+
-						'<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-last skin-noGrid-table-cell-text-last">'+
-						'<span id="ctrl-report-list-table-cell-textfield-0-6">'+
-						'<p class="base-item">'+
-						(item[i].incomeSum ? item[i].incomeSum : '--')+
-						'</p>'+
-						'</span>'+
-						'</div>'+
-						'</td>'+
-						'</tr>'+
-						'</tbody>'+
-						'</table>'+
-						'</div>'+
-						'';
+    var url = location.href;
+    var params = url.split('?');
+    if (params.length > 1) {
+        params = params[1].split('&');
+        for (var i = 0, len = params.length; i < len; i++) {
+            var param = params[i].split('=');
+            var key = param[0];
+            var value = param[1];
+            if (key === 'page') {
+                page = parseInt(value, 10);
             }
-            $('#pager-count').html('共 '+item.length+' 条');
-            $('#todayTable').html(html);
-
-            console.log(clickCountSumList);
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('myEcharts'));
-
-            option = {
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#6a7985',
-                            border: 'none'
-                        }
-                    }
-                },
-                axisLine: {
-                    show: false
-                },
-                legend: {
-                    data:['代码位展现量','页面展现量','点击量','点击率','eCPM','收入']
-                },
-                toolbox: {
-                    show: false,
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        boundaryGap : false,
-                        data : ['周一','周二','周三','周四','周五','周六','周日']
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-                    {
-                        name:'代码位展现量',
-                        type:'line',
-                        stack: '总量',
-                        areaStyle: {},
-                        data: viewCountSumList
-                    },
-                    {
-                        name:'页面展现量',
-                        type:'line',
-                        stack: '总量',
-                        areaStyle: {},
-                        data: pageViewCountSumList
-                    },
-                    {
-                        name:'点击量',
-                        type:'line',
-                        stack: '总量',
-                        areaStyle: {},
-                        data: clickCountSumList
-                    },
-                    {
-                        name:'点击率',
-                        type:'line',
-                        stack: '总量',
-                        areaStyle: {normal: {}},
-                        data: ctrList
-                    },
-                    {
-                        name:'eCPM',
-                        type:'line',
-                        stack: '总量',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        areaStyle: {normal: {}},
-                        data: ecpmList
-                    }
-                ]
-            };
-
-
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-        },
-        error: function(err) {
-            alert('请求失败');
+            else if (key === 'pageSize') {
+                pageSize = parseInt(value, 10);
+            }
         }
+    }
+
+    require(
+        [
+            'esui',
+            'esui/Button',
+            'esui/RangeCalendar',
+            'esui/RichCalendar'
+        ],
+        function (ui) {
+            ui.init();
+            ajaxOpt();
+        }
+    );
+
+    function ajaxOpt() {
+        /*
+            ***GET查询整体统计数据
+        */
+        $.ajax({
+            type: "get",
+            url: 'http://172.18.100.177/api/getDataItemTotal',
+            data: {
+                startDate: '2019-1-10',
+                endDate: '2019-1-15'
+            },
+            success: function (data) {
+                var item = data.data;
+                // clickCountSum 总点击量
+                // ctr 总点击率
+                // ecpm
+                // incomeSum 预估总收入
+                // pageViewCountSum 总页面展现量
+                // viewCountSum //总代码位展现量
+                $('#clickCountSum').html(item.clickCountSum ? item.clickCountSum : '0');
+                $('#ctr').html(item.ctr ? item.ctr : '--');
+                $('#ecpm').html(item.ecpm ? item.ecpm : '--');
+                $('#incomeSum').html(item.incomeSum ? item.incomeSum : '--');
+                $('#pageViewCountSum').html(item.pageViewCountSum ? item.pageViewCountSum : '0');
+                $('#viewCountSum').html(item.viewCountSum ? item.viewCountSum : '0');
+            },
+            error: function(err) {
+                alert('请求失败');
+            }
+        });
+        /*
+            查询按天的平均统计数据
+        */
+        $.ajax({
+            type: "get",
+            url: 'http://172.18.100.177/api/getDataItemAverageByDay',
+            data: {
+                startDate: '2019-1-10',
+                endDate: '2019-1-15'
+            },
+            success: function (data) {
+                var item = data.data;
+                //clickCountAverage//平均点击量
+                // ctr 平均点击率 id ctrAverage
+                // ecpm ecpmAverage
+                // incomeAverage 预估平均收入
+                // pageViewCountAverage 平均页面展现量
+                // viewCountAverage 平均代码位展现量
+                $('#clickCountAverage').html(item.clickCountAverage);
+                $('#ctrAverage').html(item.ctr);
+                $('#ecpmAverage').html(item.ecpm ? item.ecpm : '0.00');
+                $('#incomeAverage').html(item.incomeAverage ? item.incomeAverage : '0.00');
+                $('#pageViewCountAverage').html(item.pageViewCountAverage);
+                $('#viewCountAverage').html(item.viewCountAverage);
+                console.log(item);
+            },
+            error: function(err) {
+                alert('请求失败');
+            }
+        });
+
+        /*
+            按天查询统计数据
+        */
+        $.ajax({
+            type: "get",
+            url: 'http://172.18.100.177/api/findDataItemListByCodeLocation',
+            data: {
+                startDate: '2019-1-10',
+                endDate: '2019-1-15',
+                page: 1,
+                size: 5
+            },
+            success: function (data) {
+                var item = data.data;
+                item = [].concat(item, data.data);
+                item = [].concat(item, data.data);
+                item = [].concat(item, data.data);
+                item = [].concat(item, data.data);
+                item = [].concat(item, data.data);
+                // clickCountSum 总点击量
+                // ctr 总点击率
+                // ecpm
+                // incomeSum 预估总收入
+                // pageViewCountSum 总页面展现量
+                // viewCountSum //总代码位展现量
+                var clickCountSumList = new Array;
+                var ctrList = new Array;
+                var ecpmList = new Array;
+                var incomeSumLit = new Array;
+                var pageViewCountSumList = new Array;
+                var viewCountSumList = new Array;
+                var timeList = new Array;
+
+                var html = '';
+                for(var i = 0; i < item.length; i++) {
+                    clickCountSumList.push(item[i].viewCountSum);
+                    console.log(item[i].viewCountSum);
+                    ctrList.push(item[i].ctr);
+                    ecpmList.push(item[i].ecpm);
+                    incomeSumLit.push(item[i].incomeSum);
+                    pageViewCountSumList.push(item[i].pageViewCountSumList);
+                    viewCountSumList.push(item[i].viewCountSumList);
+                    timeList.push(item[i].dateFormated);
+                    html += '<div id="ctrl-report-list-table-row0" class="ui-table-row skin-noGrid-table-row ui-table-row-even skin-noGrid-table-row-even" data-index="0">'+
+                            '<table cellpadding="0" cellspacing="0" width="100%" data-control-table="table">'+
+                            '<tbody>'+
+                            '<tr>'+
+                            '<td id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break ui-table-cell-sorted skin-noGrid-table-cell-sorted"'+
+                            'style="width:20%;" data-control-table="table" data-row="0" data-col="0">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-0">'+
+                            item[i].dateFormated+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-1" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="1">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-1">'+
+                            '<p class="base-item">'+
+                            item[i].viewCountSum+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-2" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="2">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-2">'+
+                            '<p class="base-item">'+
+                            item[i].pageViewCountSum+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-3" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="3">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-3">'+
+                            '<p class="base-item">'+
+                            item[i].clickCountSum+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-4" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="4">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-4">'+
+                            '<p class="base-item">'+
+                            (item[i].ctr ? item[i].ctr : '--')+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-5" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="5">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-5">'+
+                            '<p class="base-item">'+
+                            (item[i].ecpm ? item[i].ecpm : '--')+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '<td id="ctrl-report-list-table-cell0-6" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
+                            'style="width:13%;" data-control-table="table" data-row="0" data-col="6">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-last skin-noGrid-table-cell-text-last">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-6">'+
+                            '<p class="base-item">'+
+                            (item[i].incomeSum ? item[i].incomeSum : '--')+
+                            '</p>'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
+                            '</tr>'+
+                            '</tbody>'+
+                            '</table>'+
+                            '</div>'+
+                            '';
+                }
+                $('#pager-count').html('共 '+item.length+' 条');
+                $('#todayTable').html(html);
+
+                console.log(clickCountSumList);
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('myEcharts'));
+
+                option = {
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross',
+                            label: {
+                                backgroundColor: '#6a7985',
+                                border: 'none'
+                            }
+                        }
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    legend: {
+                        data:['代码位展现量','页面展现量','点击量','点击率','eCPM','收入']
+                    },
+                    toolbox: {
+                        show: false,
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'代码位展现量',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data: viewCountSumList
+                        },
+                        {
+                            name:'页面展现量',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data: pageViewCountSumList
+                        },
+                        {
+                            name:'点击量',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data: clickCountSumList
+                        },
+                        {
+                            name:'点击率',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {}},
+                            data: ctrList
+                        },
+                        {
+                            name:'eCPM',
+                            type:'line',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            areaStyle: {normal: {}},
+                            data: ecpmList
+                        }
+                    ]
+                };
+
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+
+                pageCount = Math.ceil(item.length / pageSize);
+                initPage();
+            },
+            error: function(err) {
+                alert('请求失败');
+            }
+        });
+    }
+    
+
+    function initPage () {
+        require(
+            [
+                'esui',
+                'esui/Pager',
+                'esui/Tab',
+                // 'demo'
+            ],
+            function (ui, Pager) {
+
+                var pager3 = new Pager({
+                        main: document.getElementById('pager-dynamic'),
+                        pageSizes: [],
+                        count: pageCount,
+                        pageSize: pageSize,
+                        page: page
+                    }
+                );
+                pager3.render();
+                pager3.set('urlTemplate', '/topMenusReport/iframe.html?page=' + (page+1) + '&pageSize=' + pageSize);
+            }
+        );
+    }
+
+    $('#ctrl-report-list-pager-select-wrapper').on('click', function() {
+        $(this).find('ol').toggle();
+        $('#ctrl-report-list-ctrl-report-list-pager-select').toggleClass('ui-ctrl ui-select');
+        $('#ctrl-report-list-ctrl-report-list-pager-select').toggleClass('ui-ctrl ui-select ui-select-active state-active');
     });
+
+    $('#ctrl-default-ctrl-default-test1-select-layer li').on('click', function(e) {
+        pageSize = $(this).text();
+        $('#ctrl-report-list-ctrl-report-list-pager-select-text').text(pageSize);
+        $('.ui-select-item-selected').removeClass('ui-select-item-selected');
+        $(this).addClass('ui-select-item-selected');
+    })  
     // require(
     //     ['common/ioc'],
     //     function (ioc) {

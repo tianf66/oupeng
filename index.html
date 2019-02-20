@@ -162,7 +162,7 @@
             <div id="reportCproReportFrame" class="insert-frame-wrapper">
               <iframe frameborder="0" framespacing="0" marginheight="0" marginwidth="0"
               scrolling="no" src="TopMenusReport/iframe.html" height="1060" id="myIframe"
-              style="width: 100%; height: 1087px;">
+              style="width: 100%;">
               </iframe>
             </div>
           </div>
@@ -218,6 +218,17 @@
                     ui.init();
                 }
             );
+
+            var iframe = document.getElementById('myIframe');
+            setTimeout(function() {
+              if (iframe) {
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                  iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+              }
+            }, 3000);
+            
         </script>
     </body>
 </html>
