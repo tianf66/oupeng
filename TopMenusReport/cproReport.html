@@ -426,7 +426,7 @@
     </div>
 </div>
 <!-- <div id="ctrl-report-chart-chart-serie-selector-layer" -->
-            <div id="ctrl-report-chart-chart-serie-selector-layer" class="ui-chartserieselector-layer ui-layer ui-chartserieselector-active state-active" style="z-index: 1; min-width: 200px; top: 304px; right: 45px;">
+            <div id="ctrl-report-chart-chart-serie-selector-layer" class="ui-chartserieselector-layer ui-layer ui-chartserieselector-active state-active" style="z-index: 1; min-width: 200px; top: 304px; right: 30px;">
                 <div id="ctrl-report-chart-chart-serie-selector-serie-body" class="ui-chartserieselector-serie-body">
                     <div data-ui="type:BoxGroup;childName:serieSelector;boxType:radio;orientation:vertical;skin:flat"
                     class="ui-chartserieselector-serie-selector ui-ctrl ui-boxgroup skin-flat skin-flat-boxgroup ui-boxgroup-vertical state-vertical skin-flat-vertical skin-flat-boxgroup-vertical"
@@ -622,7 +622,8 @@
             'esui',
             'esui/Button',
             'esui/RangeCalendar',
-            'esui/RichCalendar'
+            'esui/RichCalendar',
+            'esui/Tip'
         ],
         function (ui) {
             ui.init();
@@ -651,8 +652,8 @@
                 // viewCountSum //总代码位展现量
                 $('#clickCountSum').html(item.clickCountSum ? item.clickCountSum : '0');
                 $('#ctr').html(item.ctr ? item.ctr : '--');
-                $('#ecpm').html(item.ecpm ? item.ecpm : '--');
-                $('#incomeSum').html(item.incomeSum ? item.incomeSum : '--');
+                $('#ecpm').html(item.ecpm == '.00' ? '--' : item.ecpm);
+                $('#incomeSum').html(item.incomeSum == '.00' ? '--' : item.incomeSum);
                 $('#pageViewCountSum').html(item.pageViewCountSum ? item.pageViewCountSum : '0');
                 $('#viewCountSum').html(item.viewCountSum ? item.viewCountSum : '0');
             },
@@ -680,8 +681,8 @@
                 // viewCountAverage 平均代码位展现量
                 $('#clickCountAverage').html(item.clickCountAverage);
                 $('#ctrAverage').html(item.ctr);
-                $('#ecpmAverage').html(item.ecpm ? item.ecpm : '0.00');
-                $('#incomeAverage').html(item.incomeAverage ? item.incomeAverage : '0.00');
+                $('#ecpmAverage').html(item.ecpm == '.00' ? '0.00' : item.ecpm);
+                $('#incomeAverage').html(item.incomeAverage == '.00' ? '0.00' : item.incomeAverage);
                 $('#pageViewCountAverage').html(item.pageViewCountAverage);
                 $('#viewCountAverage').html(item.viewCountAverage);
                 console.log(item);
@@ -704,6 +705,7 @@
                 size: pageSize
             },
             success: function (data) {
+                $("body",parent.document).find('.loading-box').hide();
                 var item = data.data;
                 // clickCountSum 总点击量
                 // ctr 总点击率
@@ -718,8 +720,10 @@
                 var pageViewCountSumList = new Array;
                 var viewCountSumList = new Array;
                 var timeList = new Array;
+                var nameList = new Array;
 
                 var html = '';
+                var tbody = '';
                 for(var i = 0; i < item.length; i++) {
                     clickCountSumList.push(item[i].viewCountSum);
                     console.log(item[i].viewCountSum);
@@ -729,18 +733,16 @@
                     pageViewCountSumList.push(item[i].pageViewCountSumList);
                     viewCountSumList.push(item[i].viewCountSumList);
                     timeList.push(item[i].dateFormated);
+                    nameList.push(item[i].name);
                     html += '<div id="ctrl-report-list-table-row0" class="ui-table-row skin-noGrid-table-row ui-table-row-even skin-noGrid-table-row-even" data-index="0">'+
                             '<table cellpadding="0" cellspacing="0" width="100%" data-control-table="table">'+
                             '<tbody>'+
                             '<tr>'+
-                            '<td id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break ui-table-cell-sorted skin-noGrid-table-cell-sorted"'+
-                            'style="width:20%;" data-control-table="table" data-row="0" data-col="0">'+
-                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first">'+
-                            '<span id="ctrl-report-list-table-cell-textfield-0-0">'+
-                            item[i].dateFormated+
-                            '</span>'+
-                            '</div>'+
-                            '</td>'+
+                            '<td style="width:20%; id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break" style="width:139px;" data-control-table="table" data-row="0" data-col="0"><div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first"><span id="ctrl-report-list-table-cell-textfield-0-0">'+
+                            '<a data-command="detail" data-command-args="u3404286|资讯猜你喜欢20：12组图-淘新闻">'+
+                            item[i].name+
+                            '</a>'+
+                            '</span></div></td>'+
                             '<td id="ctrl-report-list-table-cell0-1" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
                             'style="width:13%;" data-control-table="table" data-row="0" data-col="1">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
@@ -806,9 +808,21 @@
                             '</table>'+
                             '</div>'+
                             '';
+                             tbody +='<tr id="ctrl-report-list" class="ui-richselector-row" index="108" value="'+item[i].id+'">'+
+                                '<td class="ui-richselector-row-field" title="" style="width:0px;">'+
+                                '</td>'+
+                                '<td class="ui-richselector-row-field" title="'+item[i].name+'" style="width:undefinedpx;">'+
+                                item[i].name+
+                                '</td>'+
+                                '<td style="width:30px;">'+
+                                '<span class="ui-richselector-row-action-icon">'+
+                                '</span>'+
+                                '</td>'+
+                            '</tr>';
                 }
                 $('#pager-count').html('共 '+item.length+' 条');
                 $('#todayTable').html(html);
+                $('#reportTbody').html(tbody);
 
                 console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例

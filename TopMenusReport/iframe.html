@@ -393,7 +393,7 @@
 </div>
 <div id="ctrl-report-chart-chart-serie-selector-layer"
      class="ui-chartserieselector-layer ui-layer ui-chartserieselector-multi state-multi ui-chartserieselector-active state-active"
-     style="z-index: 1; min-width: 305px; top: 301px; right: 45px;"><div id="ctrl-report-chart-chart-serie-selector-serie-body"
+     style="z-index: 1; min-width: 305px; top: 301px; right: 30px;"><div id="ctrl-report-chart-chart-serie-selector-serie-body"
      class="ui-chartserieselector-serie-body">
         <div data-ui="type:BoxGroup;childName:serieSelector;boxType:checkbox;orientation:vertical;skin:flat"
             class="ui-chartserieselector-serie-selector ui-ctrl ui-boxgroup skin-flat skin-flat-boxgroup ui-boxgroup-vertical state-vertical skin-flat-vertical skin-flat-boxgroup-vertical"
@@ -503,7 +503,8 @@
             'esui',
             'esui/Button',
             'esui/RangeCalendar',
-            'esui/RichCalendar'
+            'esui/RichCalendar',
+            'esui/Tip'
         ],
         function (ui, Pager) {
             ui.init();
@@ -533,8 +534,8 @@
 	            // viewCountSum //总代码位展现量
 	            $('#clickCountSum').html(item.clickCountSum ? item.clickCountSum : '0');
 	            $('#ctr').html(item.ctr ? item.ctr : '--');
-	            $('#ecpm').html(item.ecpm ? item.ecpm : '--');
-	            $('#incomeSum').html(item.incomeSum ? item.incomeSum : '--');
+	            $('#ecpm').html(item.ecpm == '.00' ? '--' : item.ecpm);
+	            $('#incomeSum').html(item.incomeSum == '.00' ? '--' : item.incomeSum);
 	            $('#pageViewCountSum').html(item.pageViewCountSum ? item.pageViewCountSum : '0');
 	            $('#viewCountSum').html(item.viewCountSum ? item.viewCountSum : '0');
                 // $(".loading-box").hide();
@@ -564,8 +565,8 @@
 	            // viewCountAverage 平均代码位展现量
 	            $('#clickCountAverage').html(item.clickCountAverage);
 	            $('#ctrAverage').html(item.ctr);
-	            $('#ecpmAverage').html(item.ecpm ? item.ecpm : '0.00');
-	            $('#incomeAverage').html(item.incomeAverage ? item.incomeAverage : '0.00');
+	            $('#ecpmAverage').html(item.ecpm == '.00' ? '0.00' : item.ecpm);
+	            $('#incomeAverage').html(item.incomeAverage == '.00' ? '0.00' : item.incomeAverage);
 	            $('#pageViewCountAverage').html(item.pageViewCountAverage);
 	            $('#viewCountAverage').html(item.viewCountAverage);
                 // $(".loading-box").hide();
@@ -674,7 +675,7 @@
 							'<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
 							'<span id="ctrl-report-list-table-cell-textfield-0-5">'+
 							'<p class="base-item">'+
-							(item[i].ecpm ? item[i].ecpm : '--')+
+							(item[i].ecpm == '.00' ? '--' : item[i].ecpm)+
 							'</p>'+
 							'</span>'+
 							'</div>'+
@@ -684,7 +685,7 @@
 							'<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-last skin-noGrid-table-cell-text-last">'+
 							'<span id="ctrl-report-list-table-cell-textfield-0-6">'+
 							'<p class="base-item">'+
-							(item[i].incomeSum ? item[i].incomeSum : '--')+
+							(item[i].incomeSum == '.00' ? '--' : item[i].incomeSum)+
 							'</p>'+
 							'</span>'+
 							'</div>'+
