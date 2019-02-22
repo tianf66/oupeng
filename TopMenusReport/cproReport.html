@@ -16,6 +16,20 @@
             .ui-chartserieselector-layer, .ui-togglesubmitabletablerichselector-layer {
                 display: none;
             }
+            .richselector-submit  {
+                text-align: center;
+                width: 46px;
+                height: 20px;
+                line-height: 20px;
+                font-size: 12px;
+                margin-top: 10px;
+                float: right;
+                background: rgb(120, 132, 156);
+                border-style: solid;
+                border-color: rgb(120, 132, 156);
+                border-width: 1px;
+                color: rgb(255, 255, 255);
+            }
         </style>
         <!-- <script src="./js/echarts.min.js"></script> -->
         <!-- <script src="./js/babel-support.js"></script> -->
@@ -86,7 +100,7 @@
                     </span>
                 </div>
                 <div class="ssp-report-dock">
-                    <div id="ssp-date" data-ui-type="RangeCalendar" lass="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div="" style="width: 235px"></div>
+                    <div id="ssp-date" data-ui-type="RangeCalendar" lass="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-mini-mode="1" data-ui-variants="bordered" <="" div="" data-ui-range="2019-12-30 23:59:59,1983-09-01 00:00:00" style="width: 190px"></div>
 
                     <!-- <div data-ui-type="RangeCalendar" class="ui-rangecalendarwithcontrast ui-ctrl ui-rangecalendar" data-ui-variants="bordered" <="" div=""></div> -->
                     <esui-button data-ui-id="download" data-ui-group="report-operation" class="ssp-report-download ui-ctrl ui-button" title="下载报告" id="ctrl-report-cpro-download" data-ctrl-id="download" data-ctrl-view-context="report-cpro">
@@ -563,10 +577,7 @@
                                 全不选
                             </span>
                         </div>
-                        <div data-ui="type:Button;childName:okBtn" class="ui-richselector-submit ui-ctrl ui-button"
-                        id="ctrl-report-list-esui8786443" data-ctrl-id="esui8786443" data-ctrl-view-context="report-list">
-                            确定
-                        </div>
+                        <div data-ui="type:Button;childName:okBtn" class="richselector-submit" id="ctrl-report-list-esui8786014" data-ctrl-id="esui8786014" data-ctrl-view-context="report-list">确定</div>
                     </div>
                 </div>
             </div>
@@ -644,6 +655,7 @@
             },
             success: function (data) {
                 var item = data.data;
+                 item.ctr = item.ctr+'%';
                 // clickCountSum 总点击量
                 // ctr 总点击率
                 // ecpm
@@ -685,7 +697,6 @@
                 $('#incomeAverage').html(item.incomeAverage == '.00' ? '0.00' : item.incomeAverage);
                 $('#pageViewCountAverage').html(item.pageViewCountAverage);
                 $('#viewCountAverage').html(item.viewCountAverage);
-                console.log(item);
             },
             error: function(err) {
                 alert('请求失败');
@@ -725,8 +736,8 @@
                 var html = '';
                 var tbody = '';
                 for(var i = 0; i < item.length; i++) {
+                    item[i].ctr = item[i].ctr+'%';
                     clickCountSumList.push(item[i].viewCountSum);
-                    console.log(item[i].viewCountSum);
                     ctrList.push(item[i].ctr);
                     ecpmList.push(item[i].ecpm);
                     incomeSumLit.push(item[i].incomeSum);
@@ -744,7 +755,7 @@
                             '</a>'+
                             '</span></div></td>'+
                             '<td id="ctrl-report-list-table-cell0-1" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="1">'+
+                            'style="width:16%;" data-control-table="table" data-row="0" data-col="1">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
                             '<span id="ctrl-report-list-table-cell-textfield-0-1">'+
                             '<p class="base-item">'+
@@ -753,18 +764,8 @@
                             '</span>'+
                             '</div>'+
                             '</td>'+
-                            '<td id="ctrl-report-list-table-cell0-2" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="2">'+
-                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
-                            '<span id="ctrl-report-list-table-cell-textfield-0-2">'+
-                            '<p class="base-item">'+
-                            item[i].pageViewCountSum+
-                            '</p>'+
-                            '</span>'+
-                            '</div>'+
-                            '</td>'+
                             '<td id="ctrl-report-list-table-cell0-3" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="3">'+
+                            'style="width:16%;" data-control-table="table" data-row="0" data-col="3">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
                             '<span id="ctrl-report-list-table-cell-textfield-0-3">'+
                             '<p class="base-item">'+
@@ -774,7 +775,7 @@
                             '</div>'+
                             '</td>'+
                             '<td id="ctrl-report-list-table-cell0-4" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="4">'+
+                            'style="width:16%;" data-control-table="table" data-row="0" data-col="4">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
                             '<span id="ctrl-report-list-table-cell-textfield-0-4">'+
                             '<p class="base-item">'+
@@ -784,7 +785,7 @@
                             '</div>'+
                             '</td>'+
                             '<td id="ctrl-report-list-table-cell0-5" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="5">'+
+                            'style="width:16%;" data-control-table="table" data-row="0" data-col="5">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
                             '<span id="ctrl-report-list-table-cell-textfield-0-5">'+
                             '<p class="base-item">'+
@@ -794,7 +795,7 @@
                             '</div>'+
                             '</td>'+
                             '<td id="ctrl-report-list-table-cell0-6" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
-                            'style="width:13%;" data-control-table="table" data-row="0" data-col="6">'+
+                            'style="width:16%;" data-control-table="table" data-row="0" data-col="6">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-last skin-noGrid-table-cell-text-last">'+
                             '<span id="ctrl-report-list-table-cell-textfield-0-6">'+
                             '<p class="base-item">'+
@@ -824,7 +825,6 @@
                 $('#todayTable').html(html);
                 $('#reportTbody').html(tbody);
 
-                console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById('myEcharts'));
 
@@ -999,6 +999,43 @@
         $('.ui-select-item-selected').removeClass('ui-select-item-selected');
         $(this).addClass('ui-select-item-selected');
     })
+    $('#ssp-date').on('click', function() {
+        var timeDate = $('#ctrl-default-esui8785925-text').html();
+        var ctrlAddHtml = '<div id="ctrl-report-cpro-range-side" class="ui-rangecalendar-side">'+
+                        '<div class="ui-rangecalendar-label">'+
+                        '<h3>'+
+                        '日期范围'+
+                        '</h3>'+
+                        '</div>'+
+                        '<div id="ctrl-report-cpro-range-side-body" class="ui-rangecalendar-side-body">'+
+                        '<div id="ctrl-report-cpro-range-base-time" class="ui-rangecalendar-base-time">'+
+                        timeDate+
+                        '</div>'+
+                        '<div id="ctrl-report-cpro-range-contrast-time" class="ui-rangecalendar-contrast-time">'+
+                        '</div>'+
+                        '<div id="ctrl-report-cpro-range-contrast-action" class="ui-rangecalendar-contrast-action">'+
+                        '<label title="对比日期范围" class="ui-rangecalendar-contrast-action-check ui-ctrl ui-checkbox"'+
+                        'data-ui="type:CheckBox;childName:contrastCheck" data-ctrl-id="esui8785996"'+
+                        'id="ctrl-report-cpro-esui8785996" data-ctrl-view-context="report-cpro">'+
+                        '<input type="checkbox" name="" id="ctrl-report-cpro-esui8785996-box" value="on"'+
+                        'title="对比日期范围">'+
+                        '<span id="ctrl-report-cpro-esui8785996-text">'+
+                        '对比日期范围'+
+                        '</span>'+
+                        '</label>'+
+                        '<div data-ui="type:Select;childName:contrastSelector" class="ui-rangecalendar-contrast-action-selector ui-ctrl ui-select ui-select-hidden state-hidden"'+
+                        'tabindex="0" id="ctrl-report-cpro-esui8785999" data-ctrl-id="esui8785999"'+
+                        'data-ctrl-view-context="report-cpro">'+
+                        '<span id="ctrl-report-cpro-esui8785999-text" class="ui-select-text">'+
+                        '自定义'+
+                        '</span>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                    '</div>';
+        $('#ctrl-report-cpro-range-side').remove();
+        $('.ui-rangecalendar-body').append(ctrlAddHtml);
+    });
     // require(
     //     ['common/ioc'],
     //     function (ioc) {
