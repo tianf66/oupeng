@@ -400,7 +400,7 @@
                                 </div>
                             </esui-table>
                             <div class="list-pager">
-                				<div id="pager-dynamic"></div>
+                                <div id="pager-dynamic"></div>
                                 <esui-pager data-ui-id="pager" data-ui-count="@totalCount" data-ui-page="@page"
                                 data-ui-page-size="@pageSize" data-ui-page-type="plain" data-ui-layout="alignRight"
                                 id="ctrl-report-list-pager" data-ctrl-id="pager" data-ctrl-view-context="report-list"
@@ -519,7 +519,7 @@
                 </div>
             </div>
             <div id="ctrl-report-list-adPosition-layer" class="ui-togglesubmitabletablerichselector-layer ui-layer"
-                    style="z-index: 1; top: 797px; left: 138px;">
+                    style="z-index: 1; top: 700px; left: 138px;">
                 <div data-ui-type="SubmitableTableRichSelector" data-ui-width="300" data-ui-child-name="selector"
                 class="ui-richselector-add state-add ui-table-richselector ui-submitabletablerichselector ui-ctrl ui-richselector ui-richselector-all-unselected state-all-unselected"
                 id="ctrl-report-list-esui8786429" data-ctrl-id="esui8786429" data-ctrl-view-context="report-list"
@@ -616,7 +616,8 @@
 
     var pageSize = 20, pageCount = 0, page = 1;
     var option = {};
-    var showVc = true, showClk = false, showCtr = false, showEcpm = false, showIcm = false;
+    var showVc = false, showClk = false, showCtr = true, showEcpm = false, showIcm = false;
+    var codeLocationIdJsonArr = [];
 
     var url = location.href;
     var params = url.split('?');
@@ -715,15 +716,25 @@
         /*
             按天查询统计数据
         */
+
+        setTableData(params);
+    }
+
+    function setTableData(params, codeLocationIdJsonArr) {
+        var data = {
+            startDate: params.startDate,
+            endDate: params.endDate,
+            page: page,
+            size: pageSize
+        };
+        if(codeLocationIdJsonArr) {
+            data.codeLocationIdJsonArr = JSON.stringify(codeLocationIdJsonArr);
+        }
+
         $.ajax({
             type: "post",
             url: 'http://172.18.100.177/api/findDataItemListByCodeLocation',
-            data: {
-                startDate: params.startDate,
-                endDate: params.endDate,
-                page: page,
-                size: pageSize
-            },
+            data: data,
             success: function (data) {
                 $("body",parent.document).find('.loading-box').hide();
                 var item = data.data;
@@ -745,7 +756,6 @@
                 var pageViewCountSumListEcharts = new Array;
                 var viewCountSumList = new Array;
                 var viewCountSumListEcharts = new Array;
-                var timeList = new Array;
                 var dateList = new Array;
                 var itemName = new Array;
                 var echartsX = new Array;
@@ -761,7 +771,6 @@
                     incomeSumLit.push(item[i].incomeSum.split(',').join('') * 1);
                     pageViewCountSumList.push(item[i].pageViewCountSumList);
                     viewCountSumList.push(item[i].viewCountSumList);
-                    timeList.push(item[i].dateFormated);
                     itemName.push(item[i].name);
                     /*
                         Echarts
@@ -782,7 +791,7 @@
                              '<td style="width:20%; id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break" style="width:139px;" data-control-table="table" data-row="0" data-col="0"><div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first"><span id="ctrl-report-list-table-cell-textfield-0-0">'+
                             '<a data-command="detail">'+
                             item[i].name+
-                            '</a>'
+                            '</a></td>' +
                             '<td id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break ui-table-cell-sorted skin-noGrid-table-cell-sorted"'+
                             'style="width:20%;" data-control-table="table" data-row="0" data-col="0">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first">'+
@@ -863,201 +872,182 @@
                 // console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例
 // console.log(clickCountSumList, ctrList, ecpmList, incomeSumLit, viewCountSumList, itemName);
-                option = {
-                        tooltip: {//提示框组件
-                            trigger: 'axis',
-                            enterable: true, //鼠标是否可进入提示框浮层中
-                            confine: false,//是否将 tooltip 框限制在图表的区域内
-                            textStyle: {
-                                fontSize: '12/0',
-                            },
-                            formatter: function(params) {
-
-                                var result = params[0].axisValue +'<br/>';
-                                //提示模板拼接;
-                            　　params.forEach(function (item) {
-                            　　　　result += '<span style="display:inline-block;margin-right:5px;border-radius:1px;width:10px;height:10px;background-color:'+item.color+'"></span>'+
-                                              item.seriesName+'：'+item.data+'<br/>'
-                            　　})
-                            　　return result;
-                            }
-                        },
-                        xAxis : [
-                            {
-                                show: true,
-                                minInterval: 1,
-                                type : 'category',
-                                axisLine: {show: true},
-                                boundaryGap : true,
-                                axisTick: {show: false},
-                                splitLine:{show: true},//去除网格线
-                                splitArea : {show : false},//保留网格区域
-                                data : echartsX,
-                                axisLabel: {
-                                     formatter: function(value) {
-                                         var res = value;
-                                         if(res.length > 4) {
-                                             res = res.substring(0, 3) + "...";
-                                         }
-                                         return res;
-                                    }
-                                },
-                                axisTick: {
-                                    length: 10
-                                }
-                            }
-                        ],
-                        axisPointer: {
-                            lineStyle: {
-                                width: '2',
-                                color: '#5F99C5'
-                            },
-                        },
-                        grid: {
-                            show: true
-                        },
-                        yAxis : [{
-                                    type:'value',
-                                    axisLine: {show: true},
-                                    boundaryGap : true,
-                                    axisTick: {show: false},//y轴刻度线
-                                    splitLine:{show: false},//去除网格线
-                                    splitArea : {show : false},//保留网格区域
-                                    axisLabel: {
-                                        align: 'center',
-                                        color: '#B2B2B2',
-                                        Zindex: '999'
-                                    }
-                        }],
-                        axisLine: {
-                            show: false
-                        },
-                        legend: {
-                            show: false,
-                            data:['代码位展现量','点击量','点击率','eCPM','收入'],
-                            selected: {
-                                '代码位展现量': showVc,
-                                '点击量': showClk,
-                                '点击率': showCtr,
-                                'eCPM': showEcpm,
-                                '收入': showIcm
-                            },
-                        },
-                        toolbox: {
-                            show: false,
-                            feature: {
-                                saveAsImage: {}
-                            }
-                        },
-                        series : [
-                            {
-                                name:'代码位展现量',
-                                type:'bar',
-                                /*stack: '总量',
-                                areaStyle: {},*/
-                                barMaxWidth: 25,//最大宽度
-                                data: viewCountSumListEcharts,
-                                itemStyle: {
-                                    background: '#4db6ac',
-                                    color: '#4db6ac'
-                                },
-                            },
-                            {
-                                name:'收入',
-                                type:'bar',
-                                /*stack: '总量',
-                                areaStyle: {},*/
-                                barMaxWidth: 25,//最大宽度
-                                data: incomeSumLitEcharts,
-                                itemStyle: {
-                                    background: 'rgb(253, 34, 34)',
-                                    color: 'rgb(253, 34, 34)'
-                                },
-                            },
-                            {
-                                name:'点击量',
-                                type:'bar',
-                                /*stack: '总量',
-                                areaStyle: {},*/
-                                barMaxWidth: 25,//最大宽度
-                                data: clickCountSumListEcharts,
-                                itemStyle: {
-                                    background: '#acdd96',
-                                    color: '#acdd96'
-                                },
-                            },
-                            {
-                                name:'点击率',
-                                type:'bar',
-                                barMaxWidth: 25,//最大宽度
-                                /*stack: '总量',
-                                areaStyle: {normal: {}},*/
-                                data: ctrListEcharts,
-                                itemStyle: {
-                                    background: '#ffd155',
-                                    color: '#ffd155'
-                                },
-                            },
-                            {
-                                name:'eCPM',
-                                type:'bar',
-                                barMaxWidth: 25,//最大宽度
-                                /*stack: '总量',
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: 'top'
-                                    }
-                                },
-                                areaStyle: {normal: {}},*/
-                                data: ecpmListEcharts,
-                                itemStyle: {
-                                    background: '#acc1fe',
-                                    color: '#acc1fe'
-                                },
-                            }
-                        // };
-                            /*areaStyle: {normal: {}},*/
-                        //     data: ecpmList,
-                        //     itemStyle: {
-                        //         background: '#acc1fe',
-                        //         color: '#acc1fe'
-                        //     },
-                        // }
-                        /*{
-                            data: [2.96, 1.21, 1.07, 2.2, 1.07, 2.94, 2.63, 0.53, 3.44, 1.44, 0.67, 1.04, 3.5, 0.98, 1.84, 5.64, 0.43, 2.83, 1.71, 0.56],
-                            type: 'bar'
-                        },
-                        {
-                            data: [95829, 283239, 255281, 159583, 134722, 75578, 94087, 111584, 68593, 90012, 262647, 71816, 11672, 89444, 90975, 12937, 148802, 23670, 56999, 138215],
-                            type: 'bar'
-                        },
-                        {
-                            data: ["95,829", "283,239", "255,281", "159,583", "134,722", "75,578", "94,087", "111,584", "68,593", "90,012", "262,647", "71,816", "11,672", "89,444", "90,975", "12,937", "148,802", "23,670", "56,999", "138,215"],
-                            type: 'bar'
-                        },
-                        {
-                            data:  [31.00, 10.00, 6.28, 10.00, 10.00, 16.55, 13.01, 10.00, 15.77, 12.00, 3.58, 12.87, 77.59, 10.00, 9.00, 59.32, 5.00, 31.07, 12.26, 5.00],
-                            type: 'bar'
-                        }*/
-                    ],
-                    /*dataset: {
-                        source: [
-                            ['product', '代码位展现量','页面展现量','点击量','点击率','eCPM','收入'],
-                        ]
-                    }*/
-                };
-
                 pageCount = Math.ceil(item.length / pageSize);
                 initPage();
-                // 使用刚指定的配置项和数据显示图表。
-                myChart.setOption(option);
+
+                // console.log(clickCountSumList);
+                // 基于准备好的dom，初始化echarts实例
+                // console.log(clickCountSumList, ctrList, ecpmList, incomeSumLit, viewCountSumList, itemName);
+
+                if(codeLocationIdJsonArr) return;
+                initEChart(clickCountSumListEcharts, ctrListEcharts, ecpmListEcharts, incomeSumLitEcharts, pageViewCountSumListEcharts, viewCountSumListEcharts, echartsX);
             },
             error: function(err) {
                 // alert('请求失败');
             }
         });
     }
+
+    function initEChart(clickCountSumListEcharts, ctrListEcharts, ecpmListEcharts, incomeSumLitEcharts, pageViewCountSumListEcharts, viewCountSumListEcharts, echartsX) {
+        option = {
+                tooltip: {//提示框组件
+                    trigger: 'axis',
+                    enterable: true, //鼠标是否可进入提示框浮层中
+                    confine: false,//是否将 tooltip 框限制在图表的区域内
+                    textStyle: {
+                        fontSize: '12/0',
+                    },
+                    formatter: function(params) {
+
+                        var result = params[0].axisValue +'<br/>';
+                        //提示模板拼接;
+                    　　params.forEach(function (item) {
+                    　　　　result += '<span style="display:inline-block;margin-right:5px;border-radius:1px;width:10px;height:10px;background-color:'+item.color+'"></span>'+
+                                      item.seriesName+'：'+item.data+'<br/>'
+                    　　})
+                    　　return result;
+                    }
+                },
+                xAxis : [
+                    {
+                        show: true,
+                        minInterval: 1,
+                        type : 'category',
+                        axisLine: {show: true},
+                        boundaryGap : true,
+                        axisTick: {show: false},
+                        splitLine:{show: true},//去除网格线
+                        splitArea : {show : false},//保留网格区域
+                        data : echartsX,
+                        axisLabel: {
+                             formatter: function(value) {
+                                 var res = value;
+                                 if(res.length > 4) {
+                                     res = res.substring(0, 3) + "...";
+                                 }
+                                 return res;
+                            }
+                        },
+                        axisTick: {
+                            length: 10
+                        }
+                    }
+                ],
+                axisPointer: {
+                    lineStyle: {
+                        width: '2',
+                        color: '#5F99C5'
+                    },
+                },
+                grid: {
+                    show: true
+                },
+                yAxis : [{
+                            type:'value',
+                            axisLine: {show: true},
+                            boundaryGap : true,
+                            axisTick: {show: false},//y轴刻度线
+                            splitLine:{show: false},//去除网格线
+                            splitArea : {show : false},//保留网格区域
+                            axisLabel: {
+                                align: 'center',
+                                color: '#B2B2B2',
+                                Zindex: '999'
+                            }
+                }],
+                axisLine: {
+                    show: false
+                },
+                legend: {
+                    show: false,
+                    data:['代码位展现量','点击量','点击率','eCPM','收入'],
+                    selected: {
+                        '代码位展现量': showVc,
+                        '点击量': showClk,
+                        '点击率': showCtr,
+                        'eCPM': showEcpm,
+                        '收入': showIcm
+                    },
+                },
+                toolbox: {
+                    show: false,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                series : [
+                    {
+                        name:'代码位展现量',
+                        type:'bar',
+                        /*stack: '总量',
+                        areaStyle: {},*/
+                        barMaxWidth: 25,//最大宽度
+                        data: viewCountSumListEcharts,
+                        itemStyle: {
+                            background: '#4db6ac',
+                            color: '#4db6ac'
+                        },
+                    },
+                    {
+                        name:'收入',
+                        type:'bar',
+                        /*stack: '总量',
+                        areaStyle: {},*/
+                        barMaxWidth: 25,//最大宽度
+                        data: incomeSumLitEcharts,
+                        itemStyle: {
+                            background: 'rgb(253, 34, 34)',
+                            color: 'rgb(253, 34, 34)'
+                        },
+                    },
+                    {
+                        name:'点击量',
+                        type:'bar',
+                        /*stack: '总量',
+                        areaStyle: {},*/
+                        barMaxWidth: 25,//最大宽度
+                        data: clickCountSumListEcharts,
+                        itemStyle: {
+                            background: '#acdd96',
+                            color: '#acdd96'
+                        },
+                    },
+                    {
+                        name:'点击率',
+                        type:'bar',
+                        barMaxWidth: 25,//最大宽度
+                        /*stack: '总量',
+                        areaStyle: {normal: {}},*/
+                        data: ctrListEcharts,
+                        itemStyle: {
+                            background: '#ffd155',
+                            color: '#ffd155'
+                        },
+                    },
+                    {
+                        name:'eCPM',
+                        type:'bar',
+                        barMaxWidth: 25,//最大宽度
+                        /*stack: '总量',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        areaStyle: {normal: {}},*/
+                        data: ecpmListEcharts,
+                        itemStyle: {
+                            background: '#acc1fe',
+                            color: '#acc1fe'
+                        },
+                    }
+                ]
+            };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
     // ui-boxgroup-wrapper-checked
      window.onload = function() {
         var time = $('#ctrl-default-esui8785925-text').html().split(';')[2];
@@ -1095,6 +1085,33 @@
             // this.removeAttribute('class', 'ui-richselector-row ui-richselector-row-selected');
             $(this).toggleClass('ui-richselector-row ui-richselector-row-selected');
             // this.addClass('ui-boxgroup-wrapper-checked');
+        });
+
+        $('#ctrl-report-list-esui8786014').click(function() {
+            var items = $('#reportTbody').find('tr');
+            codeLocationIdJsonArr = [];
+            $.each(items, function(index, item) {
+                // console.log(item, index);
+                if($(item).hasClass('ui-richselector-row-selected')) {
+                    codeLocationIdJsonArr.push($(item).attr('value'));
+                }
+            });
+            setTableData(params, codeLocationIdJsonArr);
+            $('.ui-togglesubmitabletablerichselector-layer').hide();
+        });
+
+        $('#ctrl-report-list-esui8786429-batch-action-select').click(function() {
+            $('.ui-richselector-row').addClass('ui-richselector-row-selected');
+            $('.ui-richselector-row').removeClass('ui-richselector-row');
+            $(this).hide();
+            $('#ctrl-report-list-esui8786429-batch-action-deselect').show();
+        });
+
+        $('#ctrl-report-list-esui8786429-batch-action-deselect').click(function() {
+            $('.ui-richselector-row-selected').addClass('ui-richselector-row');
+            $('.ui-richselector-row-selected').removeClass('ui-richselector-row-selected');
+            $(this).hide();
+            $('#ctrl-report-list-esui8786429-batch-action-select').show();
         });
     }
 
