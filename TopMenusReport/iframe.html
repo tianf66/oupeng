@@ -246,12 +246,12 @@
                                         </div>
                                         <div class="ui-chartserieselector-legend-right">
                                             <div id="ctrl-report-chart-chart-serie-selector-serie-color-row" class="ui-chartserieselector-serie-color-row">
-                                                <div style="background:#7aff6a" class="ui-chartserieselector-serie-color-item ui-chartserieselector-serie-color-base">
+                                                <div style="background:#7aff6a" class="legendColor ui-chartserieselector-serie-color-item ui-chartserieselector-serie-color-base">
                                                 </div>
                                                 <div style="background:#98f09b" class="ui-chartserieselector-serie-color-item ui-chartserieselector-serie-color-contrast">
                                                 </div>
                                             </div>
-                                            <span class="ui-chartserieselector-legend-text">
+                                            <span class="legendText ui-chartserieselector-legend-text">
                                                 页面展现量
                                             </span>
                                         </div>
@@ -452,7 +452,8 @@
         $("body",parent.document).find('.loading-box').show();
 	});
 
-
+    var option = {};
+    var showVc = true, showClk = false, showCtr = false, showEcpm = false, showIcm = false, showPage = true;
     var pageSize = 20, pageCount = 0, page = 1;
     var url = location.href;
     var params = url.split('?');
@@ -591,7 +592,7 @@
 	            var html = '';
 	            for(var i = 0; i < (item.length > pageSize ? pageSize : item.length); i++) {
                     item[i].ctr = item[i].ctr+'%';
-	            	clickCountSumList.push(item[i].viewCountSum);
+	            	clickCountSumList.push(item[i].clickCountSum);
 	            	ctrList.push(item[i].ctr);
 	            	ecpmList.push(item[i].ecpm);
 	            	incomeSumLit.push(item[i].incomeSum);
@@ -602,7 +603,7 @@
                     /*
                         Echarts
                     */
-                    clickCountSumListEcharts.push(parseInt(item[i].viewCountSum.replace(/,/g,'')));
+                    clickCountSumListEcharts.push(parseInt(item[i].clickCountSum.replace(/,/g,'')));
                     ctrListEcharts.push(parseInt(item[i].ctr.replace(/,/g,'')));
                     ecpmListEcharts.push(parseInt(item[i].ecpm.replace(/,/g,'')));
                     incomeSumLitEcharts.push(parseInt(item[i].incomeSum.replace(/,/g,'')));
@@ -763,21 +764,6 @@
                         axis: {
                             boundaryGap: false
                         },
-    	                legend: {
-                            show: false,
-                            zlevel:0,
-                            orient:'horizontal',
-                            selectedMode: 'multiple',
-                            right: 0,
-                            // data: [
-                            //     {name:'代码位展现量',icon:'rect'},
-                            //     {name:'页面展现量',icon:'rect'},
-                            //     {name:'点击量',icon:'rect'},
-                            //     {name:'点击率',icon:'rect'},
-                            //     {name:'eCPM',icon:'rect'},
-                            //     {name:'收入',icon:'rect'},
-                            // ]
-    	                },
     	                toolbox: {
     	                    show: false,
     	                    feature: {
@@ -791,14 +777,14 @@
                         },
                         legend: {
                             show: false,
-                            data:['代码位展现量','页面展现量','点击量','点击率','eCPM','收入'],
+                            // data:['代码位展现量','点击量','点击率','eCPM','收入'],
                             selected: {
                                 '代码位展现量': true,
-                                '页面展现量': true,
-                                '点击量': false,
-                                '点击率': false,
-                                'eCPM': false,
-                                '收入': false
+                                '点击量': showClk,
+                                '点击率': showCtr,
+                                'eCPM': showEcpm,
+                                '收入': showIcm,
+                                '页面展现量': showPage
                             }
                         },
     	                series : [
@@ -810,8 +796,6 @@
                                     borderColor: 'rgb(77, 182, 172)',
                                     color: 'rgba(77, 182, 172, 0.5)'
                                 },
-    	                        stack: '总量',
-    	                        areaStyle: {},
     	                        data: viewCountSumListEcharts
     	                    },
     	                    {
@@ -822,8 +806,6 @@
                                     borderColor: 'rgb(122, 255, 106)',
                                     color: 'rgba(122, 255, 106, 0.5)'
                                 },
-    	                        stack: '总量',
-    	                        areaStyle: {},
     	                        data: pageViewCountSumListEcharts
     	                    },
     	                    {
@@ -833,8 +815,6 @@
                                     borderColor: 'rgb(172, 221, 150)',
                                     color: 'rgb(172, 221, 150)'
                                 },
-    	                        stack: '总量',
-    	                        areaStyle: {},
     	                        data: clickCountSumListEcharts
     	                    },
     	                    {
@@ -844,8 +824,6 @@
                                     borderColor: 'rgb(255, 209, 85)',
                                     color: 'rgb(255, 209, 85)'
                                 },
-    	                        stack: '总量',
-    	                        areaStyle: {normal: {}},
     	                        data: ctrListEcharts
     	                    },
     	                    {
@@ -855,14 +833,12 @@
                                     borderColor: 'rgb(172, 193, 254)',
                                     color: 'rgb(172, 193, 254)'
                                 },
-    	                        stack: '总量',
     	                        label: {
     	                            normal: {
     	                                show: true,
     	                                position: 'top'
     	                            }
     	                        },
-    	                        areaStyle: {normal: {}},
     	                        data: ecpmListEcharts
     	                    },
                             {
@@ -872,8 +848,6 @@
                                     borderColor: 'rgb(253, 34, 34)',
                                     color: 'rgb(253, 34, 34)'
                                 },
-                                stack: '总量',
-                                areaStyle: {normal: {}},
                                 data: incomeSumLitEcharts
                             }
     	                ]
@@ -920,6 +894,7 @@
             let chartTime = editStartDate+' '+weekDay[myEditStartDate.getDay()]+' ~ '+editEndDate+' '+weekDay[myEditEndDatee.getDay()];
             $('.ssp-report-chart-title').html(chartTime);
             ajaxOpt(params);
+            $('#ctrl-default-esui8785925-text').html(editTime.split(';')[2]);
         });
 
     };
@@ -1026,27 +1001,27 @@
     */
     var ctrlLabel = '<div id="ctrlOpt">'+
             '<label title="代码位展现量" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-0" title="代码位展现量" value="adPositionView">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-0" title="代码位展现量" value="adPositionView,,— —">'+
             '<span>代码位展现量</span>'+
             '</label>'+
             '<label title="页面展现量" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-1" title="页面展现量" value="pageview">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-1" title="页面展现量" value="pageview,#7aff6a,页面展现量">'+
             '<span>页面展现量</span>'+
             '</label>'+
             '<label title="点击量" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-2" title="点击量" value="click">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-2" title="点击量" value="click,#acdd96,点击量">'+
             '<span>点击量</span>'+
             '</label>'+
             '<label title="点击率" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-3" title="点击率" value="clickRatio">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-3" title="点击率" value="clickRatio,#ffd155,点击率">'+
             '<span>点击率</span>'+
             '</label>'+
             '<label title="eCPM" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-4" title="eCPM" value="ecpm">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-4" title="eCPM" value="ecpm,#acc1fe,eCPM">'+
             '<span>eCPM</span>'+
             '</label>'+
             '<label title="收入" class="ui-boxgroup-checkbox skin-flat-boxgroup-checkbox ui-boxgroup-wrapper skin-flat-boxgroup-wrapper">'+
-            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-5" title="收入" value="income">'+
+            '<input type="checkbox" name="esui8785940" id="ctrl-report-chart-esui8785939-box-5" title="收入" value="income,#fd2222,收入">'+
             '<span>收入</span>'+
             '</label>'+
             '</div>';
@@ -1055,8 +1030,80 @@
         $('#ctrl-report-chart-chart-serie-selector-layer').toggle();
     });
     $('#ctrlOpt').on('click', '.ui-boxgroup-checkbox', function() {
-        // $(this).toggleClass('ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked');
+        $('.ui-boxgroup-wrapper-checked.skin-flat-boxgroup-wrapper-checked').removeClass('ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked');
+        $('.ui-boxgroup-checkbox').eq(0).addClass('ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked');
         $(this).addClass('ui-boxgroup-wrapper-checked skin-flat-boxgroup-wrapper-checked');
+        var myChart = echarts.init(document.getElementById('myEcharts'));
+        var value = $(this).find('input').val().split(',')[0];
+        var color = $(this).find('input').val().split(',')[1];
+        var title = $(this).find('input').val().split(',')[2];
+        // console.log(value,color,title);
+        switch(value) {
+            case 'ecpm':
+                showEcpm = true;
+                showVc = true;
+                showClk = false;
+                showCtr = false;
+                showIcm = false;
+                showPage = false;
+            break;
+            case 'income':
+                showIcm = true;
+                showPage = false;
+                showVc = true;
+                showClk = false;
+                showCtr = false;
+                showEcpm = false;
+            break;
+            case 'clickRatio':
+                showCtr = true;
+                showVc = true;
+                showClk = false;
+                showIcm = false;
+                showEcpm = false;
+                showPage = false;
+            break;
+            case 'click':
+                showClk = true;
+                showVc = true;
+                showCtr = false;
+                showIcm = false;
+                showEcpm = false;
+                showPage = false;
+            break;
+            case 'adPositionView':
+                showVc = true;
+                showClk = false;
+                showCtr = false;
+                showIcm = false;
+                showEcpm = false;
+                showPage = false;
+            break;
+            case 'pageview':
+                showPage = true;
+                showVc = true;
+                showClk = false;
+                showCtr = false;
+                showIcm = false;
+                showEcpm = false;
+            break;
+        }
+        $('.legendColor')[0].style.background = color;
+        $('.legendText').html(title);
+        option = {
+            legend: {
+                data:['代码位展现量','页面展现量','点击量','点击率','eCPM','收入'],
+                selected: {
+                    '代码位展现量': true,
+                    '点击量': showClk,
+                    '点击率': showCtr,
+                    'eCPM': showEcpm,
+                    '收入': showIcm,
+                    '页面展现量': showPage
+                }
+            },
+        };
+        myChart.setOption(option);
     });
      /*
         echarts  图例选择  end
