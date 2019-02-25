@@ -749,6 +749,7 @@
                 var dateList = new Array;
                 var itemName = new Array;
                 var echartsX = new Array;
+                var itemName = new Array;
 
                 var html = '';
                 var tbody = '';
@@ -781,8 +782,14 @@
                              '<td style="width:20%; id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break" style="width:139px;" data-control-table="table" data-row="0" data-col="0"><div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first"><span id="ctrl-report-list-table-cell-textfield-0-0">'+
                             '<a data-command="detail">'+
                             item[i].name+
-                            '</a>'+
-                            '</span></div></td>'+
+                            '</a>'
+                            '<td id="ctrl-report-list-table-cell0-0" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break ui-table-cell-sorted skin-noGrid-table-cell-sorted"'+
+                            'style="width:20%;" data-control-table="table" data-row="0" data-col="0">'+
+                            '<div class="ui-table-cell-text skin-noGrid-table-cell-text ui-table-cell-text-first skin-noGrid-table-cell-text-first">'+
+                            '<span id="ctrl-report-list-table-cell-textfield-0-0">'+
+                            '</span>'+
+                            '</div>'+
+                            '</td>'+
                             '<td id="ctrl-report-list-table-cell0-1" class="ui-table-cell skin-noGrid-table-cell ui-table-cell-break skin-noGrid-table-cell-break"'+
                             'style="width:16%;" data-control-table="table" data-row="0" data-col="1">'+
                             '<div class="ui-table-cell-text skin-noGrid-table-cell-text">'+
@@ -853,6 +860,7 @@
                 $('#pager-count').html('共 '+item.length+' 条');
                 $('#todayTable').html(html);
                 $('#reportTbody').html(tbody);
+                // console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例
 // console.log(clickCountSumList, ctrList, ecpmList, incomeSumLit, viewCountSumList, itemName);
                 option = {
@@ -920,18 +928,20 @@
                                         color: '#B2B2B2',
                                         Zindex: '999'
                                     }
-                                }
-                        ],
+                        }],
+                        axisLine: {
+                            show: false
+                        },
                         legend: {
                             show: false,
-                            // data:['代码位展现量','点击量','点击率','eCPM','收入'],
+                            data:['代码位展现量','点击量','点击率','eCPM','收入'],
                             selected: {
                                 '代码位展现量': showVc,
                                 '点击量': showClk,
                                 '点击率': showCtr,
                                 'eCPM': showEcpm,
                                 '收入': showIcm
-                            }
+                            },
                         },
                         toolbox: {
                             show: false,
@@ -1006,8 +1016,37 @@
                                     color: '#acc1fe'
                                 },
                             }
+                        // };
+                            /*areaStyle: {normal: {}},*/
+                        //     data: ecpmList,
+                        //     itemStyle: {
+                        //         background: '#acc1fe',
+                        //         color: '#acc1fe'
+                        //     },
+                        // }
+                        /*{
+                            data: [2.96, 1.21, 1.07, 2.2, 1.07, 2.94, 2.63, 0.53, 3.44, 1.44, 0.67, 1.04, 3.5, 0.98, 1.84, 5.64, 0.43, 2.83, 1.71, 0.56],
+                            type: 'bar'
+                        },
+                        {
+                            data: [95829, 283239, 255281, 159583, 134722, 75578, 94087, 111584, 68593, 90012, 262647, 71816, 11672, 89444, 90975, 12937, 148802, 23670, 56999, 138215],
+                            type: 'bar'
+                        },
+                        {
+                            data: ["95,829", "283,239", "255,281", "159,583", "134,722", "75,578", "94,087", "111,584", "68,593", "90,012", "262,647", "71,816", "11,672", "89,444", "90,975", "12,937", "148,802", "23,670", "56,999", "138,215"],
+                            type: 'bar'
+                        },
+                        {
+                            data:  [31.00, 10.00, 6.28, 10.00, 10.00, 16.55, 13.01, 10.00, 15.77, 12.00, 3.58, 12.87, 77.59, 10.00, 9.00, 59.32, 5.00, 31.07, 12.26, 5.00],
+                            type: 'bar'
+                        }*/
+                    ],
+                    /*dataset: {
+                        source: [
+                            ['product', '代码位展现量','页面展现量','点击量','点击率','eCPM','收入'],
                         ]
-                    };
+                    }*/
+                };
 
                 pageCount = Math.ceil(item.length / pageSize);
                 initPage();
@@ -1140,6 +1179,7 @@
         var value = $(this).find('input').val().split(',')[0];
         var color = $(this).find('input').val().split(',')[1];
         var title = $(this).find('input').val().split(',')[2]
+        var value = $(this).find('input').val();console.log(value);
         switch(value) {
             case 'ecpm':
                 showEcpm = true;
@@ -1179,6 +1219,7 @@
         }
         $('#legendColor')[0].style.background = color;
         $('#legendText').html(title);
+        // console.log(option);
         option = {
             legend: {
                 data:['代码位展现量','点击量','点击率','eCPM','收入'],
