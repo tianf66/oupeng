@@ -617,7 +617,7 @@
     var pageSize = 20, pageCount = 0, page = 1;
     var option = {};
     var showVc = false, showClk = false, showCtr = true, showEcpm = false, showIcm = false;
-    var codeLocationIdJsonArr = [];
+    var codeLocationIdJsonArr = [], codeItems = [];
 
     var url = location.href;
     var params = url.split('?');
@@ -738,6 +738,7 @@
             success: function (data) {
                 $("body",parent.document).find('.loading-box').hide();
                 var item = data.data;
+                codeItems = item.concat([], data.data);
                 // clickCountSum 总点击量
                 // ctr 总点击率
                 // ecpm
@@ -854,17 +855,7 @@
                             '</table>'+
                             '</div>'+
                             '';
-                             tbody +='<tr id="ctrl-report-list" class="ui-richselector-row" index="108" value="'+item[i].id+'">'+
-                                '<td class="ui-richselector-row-field" title="" style="width:0px;">'+
-                                '</td>'+
-                                '<td class="ui-richselector-row-field" title="'+item[i].name+'" style="width:undefinedpx;">'+
-                                item[i].name+
-                                '</td>'+
-                                '<td style="width:30px;">'+
-                                '<span class="ui-richselector-row-action-icon">'+
-                                '</span>'+
-                                '</td>'+
-                            '</tr>';
+                            tbody += codeSelect(item[i].name, item[i].id);
                 }
                 $('#pager-count').html('共 '+item.length+' 条');
                 $('#todayTable').html(html);
@@ -886,6 +877,21 @@
                 // alert('请求失败');
             }
         });
+    }
+
+    function codeSelect(name, id) {
+        return '<tr id="ctrl-report-list" class="ui-richselector-row" index="108" value="'+id+'">'+
+            '<td class="ui-richselector-row-field" title="" style="width:0px;">'+
+            '</td>'+
+            '<td class="ui-richselector-row-field" title="'+name+'" style="width:undefinedpx;">'+
+            name+
+            '</td>'+
+            '<td style="width:30px;">'+
+            '<span class="ui-richselector-row-action-icon">'+
+            '</span>'+
+            '</td>'+
+        '</tr>';
+        
     }
 
     function initEChart(clickCountSumListEcharts, ctrListEcharts, ecpmListEcharts, incomeSumLitEcharts, pageViewCountSumListEcharts, viewCountSumListEcharts, echartsX) {
@@ -1112,6 +1118,16 @@
             $('.ui-richselector-row-selected').removeClass('ui-richselector-row-selected');
             $(this).hide();
             $('#ctrl-report-list-esui8786429-batch-action-select').show();
+        });
+        // 代码位搜索
+        $('#ctrl-report-list-esui8786433-input').bind("input propertychange change",function(event){
+            var value = $(this).val(), result = [], html = '';
+            codeItems.forEach(function(item, index) {
+                if(item.name.indexOf(value) >= 0) {
+                    html += codeSelect(item.name, item.id);
+                } 
+            });
+            $('#reportTbody').html(html);
         });
     }
 
