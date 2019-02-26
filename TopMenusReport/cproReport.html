@@ -737,7 +737,8 @@
             data: data,
             success: function (data) {
                 $("body",parent.document).find('.loading-box').hide();
-                var item = data.data;
+                var item = data.data.list;
+                var totalCount = data.data.totalCount;
                 codeItems = item.concat([], data.data);
                 // clickCountSum 总点击量
                 // ctr 总点击率
@@ -857,7 +858,7 @@
                             '';
                             tbody += codeSelect(item[i].name, item[i].id);
                 }
-                $('#pager-count').html('共 '+item.length+' 条');
+                $('#pager-count').html('共 '+totalCount+' 条');
                 $('#todayTable').html(html);
                 $('#reportTbody').html(tbody);
                 // console.log(clickCountSumList);
