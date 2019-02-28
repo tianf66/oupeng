@@ -690,7 +690,7 @@
 	            }
 	            $('#pager-count').html('共 '+totalCount+' 条');
 	            $('#todayTable').html(html);
-                setPage(item.length);
+                setPage(totalCount);
 
 	            // 基于准备好的dom，初始化echarts实例
 	            var myChart = echarts.init(document.getElementById('myEcharts'));

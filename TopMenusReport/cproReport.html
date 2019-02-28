@@ -739,7 +739,7 @@
                 $("body",parent.document).find('.loading-box').hide();
                 var item = data.data.list;
                 var totalCount = data.data.totalCount;
-                codeItems = item.concat([], data.data);
+                codeItems = item.concat([], item);
                 // clickCountSum 总点击量
                 // ctr 总点击率
                 // ecpm
@@ -864,7 +864,7 @@
                 // console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例
 // console.log(clickCountSumList, ctrList, ecpmList, incomeSumLit, viewCountSumList, itemName);
-                pageCount = Math.ceil(item.length / pageSize);
+                pageCount = Math.ceil(totalCount / pageSize);
                 initPage();
 
                 // console.log(clickCountSumList);
@@ -1151,7 +1151,7 @@
                     }
                 );
                 pager3.render();
-                pager3.set('urlTemplate', '/topMenusReport/iframe.html?page=' + (page+1) + '&pageSize=' + pageSize);
+                pager3.set('urlTemplate', '/topMenusReport/cproReport.html?page=' + (page+1) + '&pageSize=' + pageSize);
             }
         );
     }
