@@ -716,8 +716,11 @@
         /*
             按天查询统计数据
         */
-
         setTableData(params);
+        /*
+            获取代码下拉框数据
+        */
+        setCodeSelect(params);
     }
 
     function setTableData(params, codeLocationIdJsonArr) {
@@ -739,7 +742,6 @@
                 $("body",parent.document).find('.loading-box').hide();
                 var item = data.data.list;
                 var totalCount = data.data.totalCount;
-                codeItems = item.concat([], item);
                 // clickCountSum 总点击量
                 // ctr 总点击率
                 // ecpm
@@ -764,7 +766,6 @@
                 var itemName = new Array;
 
                 var html = '';
-                var tbody = '';
                 for(var i = 0; i < item.length; i++) {
                     item[i].ctr = item[i].ctr+'%';
                     clickCountSumList.push(item[i].viewCountSum);
@@ -856,14 +857,11 @@
                             '</table>'+
                             '</div>'+
                             '';
-                            tbody += codeSelect(item[i].name, item[i].id);
                 }
                 $('#pager-count').html('共 '+totalCount+' 条');
                 $('#todayTable').html(html);
-                $('#reportTbody').html(tbody);
                 // console.log(clickCountSumList);
                 // 基于准备好的dom，初始化echarts实例
-// console.log(clickCountSumList, ctrList, ecpmList, incomeSumLit, viewCountSumList, itemName);
                 pageCount = Math.ceil(totalCount / pageSize);
                 initPage();
 
@@ -876,6 +874,33 @@
             },
             error: function(err) {
                 // alert('请求失败');
+            }
+        });
+    }
+
+    function setCodeSelect(params) {
+         $.ajax({
+            type: "get",
+            url: 'http://172.18.100.177/api/findCodeLocationList',
+            data: {
+                startDate: params.startDate,
+                endDate: params.endDate
+            },
+            success: function (data) {
+                // data
+                if(data.status == 1) {
+                    var html = '';
+                    data.data.forEach(function(item, index) {
+                        // console.log(item, index);
+                        html += codeSelect(item.name, item.code_location_id);
+                    });
+                    $('#reportTbody').html(html);
+                    codeItems = [].concat([], data.data);
+                    console.log(codeItems);
+                }
+            },
+            error: function(err) {
+                alert('请求失败');
             }
         });
     }
@@ -1122,14 +1147,25 @@
         });
         // 代码位搜索
         $('#ctrl-report-list-esui8786433-input').bind("input propertychange change",function(event){
-            var value = $(this).val(), result = [], html = '';
+            var value = $('#ctrl-report-list-esui8786433-input').val();
+            var result = [], html = '';
             codeItems.forEach(function(item, index) {
-                if(item.name.indexOf(value) >= 0) {
+                if(item.name && item.name.indexOf(value) >= 0) {
                     html += codeSelect(item.name, item.id);
                 } 
             });
             $('#reportTbody').html(html);
         });
+        /*$('#ctrl-report-list-esui8786435').on('click', function() {
+            var value = $('#ctrl-report-list-esui8786433-input').val();
+            var result = [], html = '';
+            codeItems.forEach(function(item, index) {
+                if(item.name && item.name.indexOf(value) >= 0) {
+                    html += codeSelect(item.name, item.id);
+                } 
+            });
+            $('#reportTbody').html(html);
+        });*/
     }
 
     function initPage () {
