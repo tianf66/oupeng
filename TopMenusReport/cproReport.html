@@ -308,6 +308,7 @@
                                         data-ctrl-id="esui8786378" data-ctrl-view-context="report-list" title="">
                                             筛选条件：
                                         </esui-label>
+                                        <a data-ui-type="Button" data-ui-group="clear-button" data-ui-name="adPosition" data-ui-skin="delete-block" id="ctrl-report-list-esui8786349" data-ctrl-id="esui8786349" data-ctrl-view-context="report-list" class="ui-ctrl ui-button skin-delete-block skin-delete-block-button"></a>
                                     </esui-panel>
                                     <div class="list-filter-operation">
                                         <button type="submit" data-ui-type="Button" data-ui-id="filter-submit"
@@ -597,7 +598,7 @@
                         style="height: 152px;">
                             <div data-ui="type:Label;childName:emptyText" class="ui-richselector-empty-text ui-ctrl ui-label"
                             id="ctrl-report-list-esui8786439" data-ctrl-id="esui8786439" data-ctrl-view-context="report-list"
-                            title="">
+                            title="" style="display: block">
                                 没有相应的搜索结果
                             </div>
                             <div data-ui="type:Panel;childName:queryList" class="ui-richselector-query-list ui-ctrl ui-panel"
@@ -660,11 +661,11 @@
     var codeLocationIdJsonArr = [], codeItems = [];
 
     var url = location.href;
-    var params = url.split('?');
-    if (params.length > 1) {
-        params = params[1].split('&');
-        for (var i = 0, len = params.length; i < len; i++) {
-            var param = params[i].split('=');
+    var query = url.split('?');
+    if (query.length > 1) {
+        query = query[1].split('&');
+        for (var i = 0, len = query.length; i < len; i++) {
+            var param = query[i].split('=');
             var key = param[0];
             var value = param[1];
             if (key === 'page') {
@@ -949,6 +950,7 @@
                     });
                     $('#reportTbody').html(html);
                     codeItems = [].concat([], data.data);
+                    $('#ctrl-report-list-esui8786439').hide();
                 }
             },
             error: function(err) {
@@ -957,11 +959,11 @@
         });
     }
 
-    function codeSelect(name, id) {
-        return '<tr id="ctrl-report-list" class="ui-richselector-row" index="108" value="'+id+'">'+
+    function codeSelect(name, id, flag) {
+        return '<tr id="ctrl-report-list" class="' + (flag ? 'ui-richselector-row-selected' : 'ui-richselector-row') + '" index="108" value="'+id+'">'+
             '<td class="ui-richselector-row-field" title="" style="width:0px;">'+
             '</td>'+
-            '<td class="ui-richselector-row-field" title="'+name+'" style="width:undefinedpx;">'+
+            '<td class="ui-richselector-row-field" title="'+name+'">'+
             name+
             '</td>'+
             '<td style="width:30px;">'+
@@ -1134,6 +1136,8 @@
 
     // ui-boxgroup-wrapper-checked
      window.onload = function() {
+        var selected = '';
+
         var time = $('#ctrl-default-esui8785925-text').html().split(';')[2];
         $('#ctrl-default-esui8785925-text').html(time);
         var startDate = time.split('至')[0].split(' ')[0];
@@ -1177,11 +1181,19 @@
             $.each(items, function(index, item) {
                 // console.log(item, index);
                 if($(item).hasClass('ui-richselector-row-selected')) {
+                    if(!selected) {
+                        selected = $(item).text();
+                    }
                     codeLocationIdJsonArr.push($(item).attr('value'));
                 }
             });
             setTableData(params, codeLocationIdJsonArr);
             $('.ui-togglesubmitabletablerichselector-layer').hide();
+            $('#ctrl-report-list-filter-submit').addClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-filter-modify').removeClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-list-filter-select-panel').addClass('state-hidden');
+            $('#ctrl-report-list-list-filter-selected-panel').removeClass('state-hidden');
+            $('#ctrl-report-list-list-filter-selected-panel a').text('代码位: ' + selected + '等');
         });
 
         $('#ctrl-report-list-esui8786429-batch-action-select').click(function() {
@@ -1203,15 +1215,58 @@
             var result = [], html = '';
             codeItems.forEach(function(item, index) {
                 if(item.name && item.name.indexOf(value) >= 0) {
-                    html += codeSelect(item.name, item.code_location_id);
+                    if(codeLocationIdJsonArr.indexOf(item.code_location_id) > -1) {
+                        html += codeSelect(item.name, item.code_location_id, true);
+                    } else {
+                        html += codeSelect(item.name, item.code_location_id, false);
+                    }
                 } 
             });
-            $('#reportTbody').html(html);
+            if(html) {
+                $('#reportTbody').html(html).show();
+                $('#ctrl-report-list-esui8786439').hide();
+            } else {
+                $('#reportTbody').hide();
+                $('#ctrl-report-list-esui8786439').show();
+            }
+            
 
             if(!value) {
                 $('#ctrl-report-list-esui8786429-batch-action-select').show();
                 $('#ctrl-report-list-esui8786429-batch-action-deselect').hide();
             }
+        });
+
+        $('#ctrl-report-list-filter-modify').on('click', function() {
+            $('#ctrl-report-list-list-filter-select-panel').removeClass('state-hidden');
+            $('#ctrl-report-list-list-filter-selected-panel').addClass('state-hidden');
+            $('#ctrl-report-list-filter-submit').removeClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-filter-modify').addClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-adPosition-text').text(selected);
+            $('#ctrl-report-list-esui8786433-input').val('');
+
+            var html = '';
+            codeItems.forEach(function(item, index) {
+                if(codeLocationIdJsonArr.indexOf(item.code_location_id) > -1) {
+                    html += codeSelect(item.name, item.code_location_id, true);
+                } else {
+                    html += codeSelect(item.name, item.code_location_id, false);
+                }
+                $('#reportTbody').html(html);
+            });
+        });
+
+        $('#ctrl-report-list-filter-cancel').on('click', function() {
+            codeLocationIdJsonArr = [];
+            $('#ctrl-report-list-adPosition-text').text('请选择');
+            $('#ctrl-report-list-list-filter-select-panel').removeClass('state-hidden');
+            $('#ctrl-report-list-list-filter-selected-panel').addClass('state-hidden');
+            $('#ctrl-report-list-filter-submit').removeClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-filter-modify').addClass('ui-button-hidden state-hidden');
+            $('#ctrl-report-list-esui8786433-input').val('');
+            $('#reportTbody').html('');
+            setTableData(params);
+            setCodeSelect(params);
         });
         /*$('#ctrl-report-list-esui8786435').on('click', function() {
             var value = $('#ctrl-report-list-esui8786433-input').val();
@@ -1306,7 +1361,7 @@
         var value = $(this).find('input').val().split(',')[0];
         var color = $(this).find('input').val().split(',')[1];
         var title = $(this).find('input').val().split(',')[2]
-        var value = $(this).find('input').val();console.log(value);
+        var value = $(this).find('input').val();
         switch(value) {
             case 'ecpm':
                 showEcpm = true;
